@@ -1,0 +1,124 @@
+:host {
+  display: block;
+}
+
+.workations {
+  max-width: 820px; /* compact width so columns narrow and long text wraps, per the reference */
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--wf-border-outer);
+  border-radius: 3px;
+}
+
+.workation-table {
+  width: 100%;
+  background: #fff;
+  font-size: 0.875rem;
+
+  .mat-mdc-header-cell {
+    background: var(--wf-header-bg);
+    color: var(--wf-text-subtle);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: normal;
+    border-bottom: 1px solid var(--wf-border);
+    padding: 0.75rem 0.625rem;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--wf-border);
+    }
+  }
+
+  .mat-mdc-cell {
+    color: var(--wf-text);
+    border-bottom: 1px solid var(--wf-border);
+    padding: 0.875rem 0.625rem;
+    letter-spacing: normal;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--wf-border);
+    }
+  }
+
+  .mat-mdc-row:hover {
+    background: var(--wf-row-hover);
+  }
+
+  .cell--employee {
+    font-weight: 500;
+    color: var(--wf-text-strong);
+  }
+
+  .cell--date {
+    color: var(--wf-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cell--numeric {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Stacked up/down sort carets; active one is highlighted from the th aria-sort. */
+.sort-carets {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: 0.375rem;
+  flex: 0 0 auto;
+}
+
+.sort-carets__up,
+.sort-carets__down {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+.sort-carets__up {
+  border-bottom: 5px solid var(--wf-caret-idle);
+}
+
+.sort-carets__down {
+  border-top: 5px solid var(--wf-caret-idle);
+}
+
+th[aria-sort='ascending'] .sort-carets__up {
+  border-bottom-color: var(--wf-caret-active);
+}
+
+th[aria-sort='descending'] .sort-carets__down {
+  border-top-color: var(--wf-caret-active);
+}
+
+/* Hide Material's own sort arrow — we render our own stacked carets instead. */
+.workation-table ::ng-deep .mat-sort-header-arrow {
+  display: none;
+}
+
+.cell--message {
+  padding: 1.75rem 1rem;
+  text-align: center;
+  color: var(--wf-text-subtle);
+}
+
+.state {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.875rem;
+
+  &--loading {
+    color: var(--wf-text-subtle);
+  }
+
+  &--error {
+    color: var(--wf-risk-high);
+  }
+}

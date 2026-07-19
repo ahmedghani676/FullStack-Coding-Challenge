@@ -1,0 +1,132 @@
+/* flag-icons CSS is loaded via angular.json */
+@use '@angular/material' as mat;
+
+html {
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+      ),
+      typography: (
+        plain-family: (
+          "Inter",
+          Arial,
+          "Helvetica Neue",
+          Helvetica,
+          sans-serif,
+        ),
+      ),
+      density: -1,
+    )
+  );
+
+  @include mat.table-overrides(
+    (
+      background-color: #ffffff,
+      header-headline-color: #53627c,
+      row-item-label-text-color: #5f6c85,
+      row-item-outline-color: #dfe1e6,
+    )
+  );
+}
+
+:root {
+  /* Text */
+  --wf-text-strong: #2f3e55; /* employee names (darkest) */
+  --wf-text: #5f6c85; /* body / data text (blue-slate) */
+  --wf-text-subtle: #53627c; /* header labels */
+
+  /* Borders */
+  --wf-border: #dfe1e6;
+  --wf-border-outer: #dfe1e6;
+
+  /* Backgrounds */
+  --wf-header-bg: #f7f8fa;
+  --wf-row-hover: #f5f9f8;
+
+  /* Sort arrows */
+  --wf-caret-idle: #7a869a;
+  --wf-caret-active: #253858;
+
+  /* Risk */
+  --wf-risk-high: #ff5630;
+  --wf-risk-low: #ffab00;
+  --wf-risk-no: #36b37e;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #fff;
+  color: var(--wf-text);
+
+  font-family: "Inter", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Table */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--wf-border-outer);
+}
+
+thead tr {
+  background: var(--wf-header-bg);
+}
+
+th {
+  font-family: "Inter", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--wf-text-subtle);
+
+  padding: 14px 10px;
+
+  border-bottom: 1px solid var(--wf-border);
+  border-right: 1px solid var(--wf-border);
+}
+
+td {
+  font-family: "Inter", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--wf-text);
+
+  padding: 14px 10px;
+
+  border-bottom: 1px solid var(--wf-border);
+  border-right: 1px solid var(--wf-border);
+
+  vertical-align: middle;
+}
+
+tbody tr:hover {
+  background: var(--wf-row-hover);
+}
+
+.employee-name {
+  color: var(--wf-text-strong);
+  font-weight: 400;
+}
+
+.mat-sort-header-arrow {
+  color: var(--wf-caret-idle);
+}
+
+.mat-sort-header-sorted .mat-sort-header-arrow {
+  color: var(--wf-caret-active);
+}

@@ -1,0 +1,19 @@
+/* The shield colour is baked into the SVG (public/icons/risk-<level>.svg); the
+   label stays slate. */
+.risk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.risk__icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.risk__label {
+  color: var(--wf-text);
+  white-space: nowrap;
+}

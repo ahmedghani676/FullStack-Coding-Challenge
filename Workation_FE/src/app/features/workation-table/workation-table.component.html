@@ -1,0 +1,105 @@
+<section class="workations">
+  <div class="table-wrapper">
+    <!-- Always-visible stacked up/down sort carets, reused in every header. The
+         active caret is highlighted purely via CSS from the th's aria-sort. -->
+    <ng-template #carets>
+      <span class="sort-carets" aria-hidden="true">
+        <span class="sort-carets__up"></span>
+        <span class="sort-carets__down"></span>
+      </span>
+    </ng-template>
+
+    <table
+      mat-table
+      matSort
+      [dataSource]="workations()"
+      (matSortChange)="onSortChange($event)"
+      class="workation-table"
+    >
+      <!-- Employee -->
+      <ng-container matColumnDef="employee">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">Employee</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w" class="cell--employee">{{ w.employee }}</td>
+      </ng-container>
+
+      <!-- Origin -->
+      <ng-container matColumnDef="origin">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">Origin</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w"><app-location-cell [country]="w.origin" /></td>
+      </ng-container>
+
+      <!-- Destination -->
+      <ng-container matColumnDef="destination">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">Destination</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w"><app-location-cell [country]="w.destination" /></td>
+      </ng-container>
+
+      <!-- Start -->
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">Start</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w" class="cell--date">
+          {{ w.startDate | date: 'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <!-- End -->
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">End</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w" class="cell--date">
+          {{ w.endDate | date: 'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <!-- Working days -->
+      <ng-container matColumnDef="workingDays">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">Working days</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w" class="cell--numeric">{{ w.workingDays }}</td>
+      </ng-container>
+
+      <!-- Risk -->
+      <ng-container matColumnDef="risk">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span class="th-label">Risk</span>
+          <ng-container [ngTemplateOutlet]="carets" />
+        </th>
+        <td mat-cell *matCellDef="let w"><app-risk-badge [risk]="w.risk" /></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" class="workation-table__row"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        @if (!loading() && !error()) {
+          <td class="cell--message" [attr.colspan]="displayedColumns.length">
+            No workations to display.
+          </td>
+        }
+      </tr>
+    </table>
+
+    @if (loading()) {
+      <p class="state state--loading">Loading workations…</p>
+    }
+    @if (error()) {
+      <p class="state state--error">Could not load workations. Please try again.</p>
+    }
+  </div>
+</section>

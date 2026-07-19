@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./Workation_BE
+    image: workation-backend
+    container_name: workation-backend
+    ports:
+      - "8080:8080"
+    healthcheck:
+      # No curl in the slim JRE image — use bash's /dev/tcp to check the port.
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./Workation_FE
+    image: workation-frontend
+    container_name: workation-frontend
+    ports:
+      - "8081:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

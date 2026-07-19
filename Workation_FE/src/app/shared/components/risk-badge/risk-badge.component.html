@@ -1,0 +1,9 @@
+<span class="risk risk--{{ riskModifier() }}">
+  <img
+    class="risk__icon"
+    [src]="'icons/risk-' + riskModifier() + '.svg'"
+    alt=""
+    aria-hidden="true"
+  />
+  <span class="risk__label">{{ risk() | riskLabel }}</span>
+</span>

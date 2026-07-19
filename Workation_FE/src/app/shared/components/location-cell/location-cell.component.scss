@@ -1,0 +1,13 @@
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.fi {
+  width: 1.375rem;
+  height: 1rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(9, 30, 66, 0.08);
+  flex: 0 0 auto;
+}
